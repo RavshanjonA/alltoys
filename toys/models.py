@@ -20,6 +20,7 @@ class User(models.Model):
     email = models.EmailField(max_length=100, null=True, blank=True, unique=True)
     phone = models.CharField(max_length=100, null=True, blank=True)
     age = models.IntegerField()
+    address = models.OneToOneField(Address, on_delete=models.PROTECT, null=True, blank=True)
 
     objects = models.Manager()
     active_objects = ActiveObjectsManager()

@@ -135,3 +135,6 @@ venv/
 
 #pythonanywhere.com
 static/
+
+#faker
+populate_toys_app.py
