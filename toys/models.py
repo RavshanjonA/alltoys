@@ -12,11 +12,13 @@ class User(models.Model):
     last_name = models.CharField(max_length=50)
     age = models.IntegerField()
 
-    object = models.Manager()
+    objects = models.Manager()
     active_objects = ActiveObjectsManager()
 
     def __str__(self):
         return self.first_name
+
+
 
 
 class Toy(models.Model):
