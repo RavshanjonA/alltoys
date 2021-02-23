@@ -11,6 +11,8 @@ class Address(models.Model):
     city = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
+    def __str__(self):
+        return self.street
 
 
 class User(models.Model):
@@ -32,6 +34,8 @@ class User(models.Model):
 class Tag(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
+    def __str__(self):
+        return self.name
 
 
 class Toy(models.Model):
@@ -41,3 +45,6 @@ class Toy(models.Model):
     tag = models.ManyToManyField(Tag, related_name='toys')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
