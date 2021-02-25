@@ -4,16 +4,34 @@
     <meta charset="UTF-8">
     <title>Home Page</title>
 </head>
-<body ">
+<body style="display: flex" >
 
         <div style="width: 200px;">
                 <h3>Toys</h3>
                     {% for toy in toys %}
 
-                    <p> {{forloop.counter}} {{toy.name}}</p>
+                    <p> {{forloop.counter}} {{toy.name}} {{toy.user.first_name}}</p>
 
                     {% endfor %}
          </div>
-        </div>
+        <div style="width: 200px;">
+                <h3>Toys</h3>
+                    {% for toy in toys1 %}
+
+                    <p> {{forloop.counter}} {{toy.name}} {{toy.user.first_name}}</p>
+
+                    {% endfor %}
+         </div>
+        <div style="width: 200px;">
+                <h3>Toys</h3>
+                    {% for toy in toys2 %}
+
+                    <p> {{forloop.counter}} {{toy.name}} {{toy.user.first_name}}</p>
+
+                    {% endfor %}
+         </div>
+
+
+        </d>
     </body>
 </html>
