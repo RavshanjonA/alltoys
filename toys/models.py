@@ -6,11 +6,21 @@ class ActiveObjectsManager(models.Manager):
         return super().get_queryset().filter(is_active=True)
 
 
+class BaseModel(models.Model):
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
 class Address(models.Model):
     street = models.CharField(max_length=100, help_text="name of street")
     city = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
+
     def __str__(self):
         return self.street
 
@@ -34,6 +44,7 @@ class User(models.Model):
 class Tag(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
+
     def __str__(self):
         return self.name
 
@@ -42,9 +53,32 @@ class Toy(models.Model):
     name = models.CharField(max_length=100)
     user = models.ForeignKey(User, related_name='toys', on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     tag = models.ManyToManyField(Tag, related_name='toys')
+    is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
+
+
+#
+class Company(BaseModel):
+    name = models.CharField(max_length=50)
+    decription = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Employee(BaseModel):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50, null=True, blank=True)
+    email = models.EmailField(max_length=100, null=True, blank=True, unique=True)
+    phone = models.CharField(max_length=100, null=True, blank=True)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    salary = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return self.first_name
