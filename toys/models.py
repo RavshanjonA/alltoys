@@ -19,7 +19,6 @@ class Address(models.Model):
     street = models.CharField(max_length=100, help_text="name of street")
     city = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=100)
-    country = models.CharField(max_length=100)
 
     def __str__(self):
         return self.street
@@ -54,19 +53,10 @@ class Toy(models.Model):
     user = models.ForeignKey(User, related_name='toys', on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    tag = models.ManyToManyField(Tag, related_name='toys')
+    tags = models.ManyToManyField(Tag, related_name='toys')
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.name
-
-
-#
-class Company(BaseModel):
-    name = models.CharField(max_length=50)
-    decription = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -77,8 +67,16 @@ class Employee(BaseModel):
     last_name = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField(max_length=100, null=True, blank=True, unique=True)
     phone = models.CharField(max_length=100, null=True, blank=True)
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
     salary = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
         return self.first_name
+
+
+class Company(BaseModel):
+    name = models.CharField(max_length=50)
+    decription = models.TextField(null=True, blank=True)
+    employee = models.ManyToManyField(Employee, related_name='company',  null=True, blank=True)
+
+    def __str__(self):
+        return self.name
