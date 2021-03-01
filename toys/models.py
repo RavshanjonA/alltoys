@@ -60,6 +60,11 @@ class Toy(models.Model):
 
     def __str__(self):
         return self.name
+class Company(BaseModel):
+    name = models.CharField(max_length=50)
+    decription = models.TextField(null=True, blank=True)
+    def __str__(self):
+        return self.name
 
 
 class Employee(BaseModel):
@@ -68,15 +73,9 @@ class Employee(BaseModel):
     email = models.EmailField(max_length=100, null=True, blank=True, unique=True)
     phone = models.CharField(max_length=100, null=True, blank=True)
     salary = models.DecimalField(max_digits=10, decimal_places=2)
+    company = models.ForeignKey(Company, related_name='employee',  on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.first_name
 
 
-class Company(BaseModel):
-    name = models.CharField(max_length=50)
-    decription = models.TextField(null=True, blank=True)
-    employee = models.ManyToManyField(Employee, related_name='company',  null=True, blank=True)
-
-    def __str__(self):
-        return self.name
