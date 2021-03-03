@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Page</title>
+</head>
+<body>
+
+    <h3>List of Products</h3>
+    {%  for product in object_list  %}
+
+            <p><b>product id : </b> {{product.id}}</p>
+            <p><b>product name :</b> <a href="{% url 'markets:product_item' product.id %}"> {{product.name}}  </a></p>
+    <br>
+    {% endfor %}
+</body>
+</html>
