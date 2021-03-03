@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h3>
+        Hello! ALl markets are here
+    </h3>
+    {% for market in markets  %}
+        <p> <b> Market id :</b> {{market.id}}</p>
+        <a href="{{ market.id }}"> {{market.name}}    </a>
+    <p><b> Market address :</b> {{market.address}}</p>
+    <br>
+    {% endfor %}
+
+
+</body>
+</html>
