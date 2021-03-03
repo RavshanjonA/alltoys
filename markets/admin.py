@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from markets.models import Market, Product
+
+admin.site.register(Product)
+admin.site.register(Market)

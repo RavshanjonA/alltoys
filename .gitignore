@@ -139,3 +139,4 @@ static/
 #faker
 populate_toys_app.py
 populate_company.py
+populate_markets.py
