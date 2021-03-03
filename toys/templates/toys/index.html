@@ -10,8 +10,9 @@
                 <h3>Toys</h3>
                     {% for toy in toys %}
 
-                    <p> {{forloop.counter}} {{toy.name}} </p>
-                        {% for tg in toy.tag.all %}
+                    <p> {{forloop.counter}}
+                        {{toy.name}} </p>
+                        {% for tg in toy.tags.all %}
                             <p>
                                {{forloop.counter}}  {{tg.name}}
                             </p>

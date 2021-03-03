@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail Page</title>
+</head>
+<body>
+    <div>
+        <h3>{{toy.name}}</h3>
+        <p>{{toy.user}}</p>
+        <p>{{toy.price}}</p>
+        {% for tag in toy.tags.all %}
+            <p>{{tag.name}}</p>
+        {% endfor %}
+
+        <p>{{toy.is_updated}}</p>
+
+    </div>
+
+
+</body>
+</html>
