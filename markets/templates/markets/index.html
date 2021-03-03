@@ -10,7 +10,7 @@
     </h3>
     {% for market in markets  %}
         <p> <b> Market id :</b> {{market.id}}</p>
-        <a href="{{ market.id }}"> {{market.name}}    </a>
+        <p> <b> Market name : </b> <a href="{% url 'markets:index_markets' market.id %}"> {{market.name}}    </a></p>
     <p><b> Market address :</b> {{market.address}}</p>
     <br>
     {% endfor %}

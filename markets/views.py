@@ -1,11 +1,7 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from markets.models import Market
-
-
-def index(request):
-    return HttpResponse("<h1> Hello this is Market place</h1>")
 
 
 def all_markets(request):
@@ -17,7 +13,10 @@ def all_markets(request):
 
 
 def index_market(request, **kwargs):
-    market = Market.objects.get(pk=kwargs.get('id'))
+    try:
+        market = Market.objects.get(pk=kwargs.get('id'))
+    except Market.DoesNotExist:
+        return redirect('markets:all_markets', )
     my_ob = {
         'market': market
     }
