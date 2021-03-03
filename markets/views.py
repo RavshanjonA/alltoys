@@ -1,8 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.views.generic import TemplateView
 
 from markets.models import Market
 
+class ProductView(TemplateView):
+    template_name = 'markets/template.html'
+    extra_context = {'source': 'Product Page'}
 
 def all_markets(request):
     markets = Market.objects.all()
