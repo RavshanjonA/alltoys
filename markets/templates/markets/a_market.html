@@ -8,6 +8,13 @@
     <p> <b> Market id :</b> {{market.id}}</p>
         <p> <b> Market name :</b> {{market.name}}</p>
         <p><b> Market address :</b> {{market.address}}</p>
-
+    <br>
+        <h3>Related products</h3>
+        {% for product in market.products.all %}
+            <p><b>product name : </b>{{product.name}}</p>
+            <p><b>product price : </b>{{product.price}}</p>
+            <p><b>product description : </b>{{product.descirption}}</p>
+    <br>
+        {% endfor %}
 </body>
 </html>
