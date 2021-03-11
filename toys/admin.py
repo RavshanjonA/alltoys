@@ -5,6 +5,7 @@ from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 
 from toys.models import Address, Tag, Toy, User, Company, Employee
+from toys.service.send_salary_report import send_employee_slaray_report
 from toys.service.send_weekly_report import send_weekly_toys_count
 
 
@@ -60,13 +61,9 @@ class TagAdmin(admin.ModelAdmin):
 class UserAdmin(UserAdmin):
     list_display = ['first_name', 'last_name', 'password_change_link']
     readonly_fields = ('password_change_link',)
-    # form = UserAdminForm
-    actions = (
-        send_weekly_email_report,
-    )
 
     fieldsets = (
-        (None, {'fields': ('username', 'password', 'password_change_link')}),
+        (None, {'fields': ('username', 'password', 'password_change_link',)}),
         (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
         (_('Permissions'), {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
@@ -87,6 +84,18 @@ class CompanyEmployeeInline(admin.StackedInline):
     model = Employee
     extra = 0
 
+def send_company_report(modeladmin, request, queryset):
+    str =''
+    for company in queryset:
+
+        if not company.email:
+            modeladmin.message_user( request,f'Selected company {company.name} does not have email address ', messages.ERROR)
+
+        send_employee_slaray_report(company)
+        str +='Salary report sent to company email: %s \t'% company.email
+
+    modeladmin.message_user(request, str, messages.INFO)
+    return HttpResponseRedirect(request.get_full_path())
 
 
 
@@ -101,3 +110,4 @@ class CompanyAdmin(admin.ModelAdmin):
     inlines = [
         CompanyEmployeeInline,
     ]
+    actions = [ send_company_report ]
