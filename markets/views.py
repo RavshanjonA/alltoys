@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from markets.models import Market, Product
 
@@ -26,10 +26,10 @@ class ProductItemView(DetailView):
     template_name = 'product/item.html'
 
 
-class ProductDeleteView(DetailView):
+class ProductDeleteView(DeleteView):
     model = Product
     template_name = 'product/delete.html'
-    success_url = reverse_lazy('markets:product ')
+    success_url = reverse_lazy('markets:product')
 
 
 class ProductCreateView(CreateView):

@@ -25,8 +25,10 @@ SECRET_KEY = '1)%%ird+vtdlu$xt#fv#$zn^7s(x*im49-xo*9$mx4u+n=!^!='
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'ravshanbek.pythonanywhere.com']
-
+AUTH_USER_MODEL = "toys.User"
 # Application definition
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
